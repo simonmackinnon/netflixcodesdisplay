@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Netflix Genre Browsing</title>
+    <link rel="stylesheet" href="style.css">
+     
+    <script type="text/javascript" src="jquery-1.11.1.js"></script>
+
+    <script type="text/javascript">
+        $("document").ready(function() {
+            getJSONData();
+        });        
+        
+        function getJSONData() {
+          $.getJSON("codes.json", successFn);          
+        }        
+        
+        function successFn(result) {          
+          $.each(result.codes, function(key, item) {
+                var linkDiv = $("<div class='codeDiv'><a target='_blank' href='http://www.netflix.com/browse/genre/"+item.Code+"'>"+item.Genre+"</a></div>")                
+                $("#content").append(linkDiv);              
+            })         
+        }
+    </script>
+    
+</head>
+<body>
+    <h1>Netflix genre browsing</h1>
+    <p>Click on each link to browse Netflix category (opens new tab*)</p>
+    <p id="content"></p>
+	<p>*Doesn't work with chrome</p>
+</body>
+</html>
